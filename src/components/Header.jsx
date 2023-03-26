@@ -1,9 +1,9 @@
+import styled from "styled-components";
+
 import logoMobile from "../assets/logo-mobile.svg";
 import iconChevronDown from "../assets/icon-chevron-down.svg";
 import iconAddTask from "../assets/icon-add-task-mobile.svg";
 import iconVerticalEllipsis from "../assets/icon-vertical-ellipsis.svg";
-
-import styled from "styled-components";
 
 function Header() {
   return (
