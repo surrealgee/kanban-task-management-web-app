@@ -1,12 +1,23 @@
 import styled from "styled-components";
 import EmptyBoard from "./EmptyBoard";
+import Column from "./Column";
 
 function Board() {
   return (
-    <main>
-      <EmptyBoard />
-    </main>
+    <StyledBoard>
+      <Column />
+      <Column />
+      <Column />
+    </StyledBoard>
   );
 }
+
+const StyledBoard = styled.main`
+  min-height: 90vh;
+  padding: 0 1em;
+  display: flex;
+  gap: 1.5em;
+  overflow-x: scroll;
+`;
 
 export default Board;
