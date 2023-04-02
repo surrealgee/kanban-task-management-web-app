@@ -94,6 +94,7 @@ const StyledTaskModal = styled.div`
 
   .subtask {
     display: flex;
+    align-items: center;
     gap: 1em;
     padding: 1em 0.5em;
   }
@@ -105,7 +106,7 @@ const StyledTaskModal = styled.div`
     margin: 0;
   }
 
-  label {
+  .subtask label {
     font-family: "Plus Jakarta Sans";
     font-weight: 700;
     font-size: 0.75rem;
