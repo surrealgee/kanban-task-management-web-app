@@ -16,7 +16,7 @@ const StyledBoard = styled.main`
   padding: 0 1em;
   display: flex;
   gap: 1.5em;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
 
 export default Board;
