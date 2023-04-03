@@ -3,16 +3,21 @@ import BoardSelector from "../BoardSelector";
 import BtnNewBoard from "../utils/BtnNewBoard";
 import ThemeSelector from "../utils/ThemeSelector";
 
+import useData from "../../hooks/useData";
+
 function SelectBoardModal() {
+  const { boardsData } = useData();
+  const { boards } = boardsData;
+
+  const boardsList = boards.map((element) => (
+    <BoardSelector name={element.name} />
+  ));
+
   return (
     <StyledBackdrop>
       <StyledModal>
-        <h3>All Boards (3)</h3>
-        <div>
-          <BoardSelector selected />
-          <BoardSelector />
-          <BoardSelector />
-        </div>
+        <h3>All Boards ({boards.length})</h3>
+        <div>{boardsList}</div>
         <BtnNewBoard />
         <ThemeSelector />
       </StyledModal>

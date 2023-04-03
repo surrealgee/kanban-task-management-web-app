@@ -1,16 +1,17 @@
 import styled from "styled-components";
 import TaskCard from "./TaskCard";
 
-function Column() {
+function Column({ name, tasks }) {
+  const taskList = tasks.map((element) => (
+    <TaskCard title={element.title} subtasks={element.subtasks} />
+  ));
+
   return (
     <StyledColumn>
-      <h2>TODO (4)</h2>
-      <div className="tasks-grid">
-        <TaskCard title="Build UI for onboarding flow" />
-        <TaskCard title="Build UI for search" />
-        <TaskCard title="Build settings UI" />
-        <TaskCard title="QA and test all major user journeys" />
-      </div>
+      <h2>
+        {name.toUpperCase()} ({tasks.length})
+      </h2>
+      <div className="tasks-grid">{taskList}</div>
     </StyledColumn>
   );
 }

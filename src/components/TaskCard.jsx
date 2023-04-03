@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-function TaskCard({ title }) {
+function TaskCard({ title, subtasks }) {
+  const completed = subtasks.filter((element) => element.isCompleted);
+
   return (
     <StyledTaskCard className="task">
       <h3>{title}</h3>
-      <p>0 of 3 subtasks</p>
+      <p>
+        {completed.length} of {subtasks.length} subtasks
+      </p>
     </StyledTaskCard>
   );
 }

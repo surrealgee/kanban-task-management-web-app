@@ -2,11 +2,11 @@ import styled from "styled-components";
 import IconBoard from "../assets/icon-board.svg";
 import IconBoardWhite from "../assets/icon-board-white.svg";
 
-function BoardSelector({ selected }) {
+function BoardSelector({ name, selected }) {
   return (
     <StyledSelector selected={selected}>
       <img src={selected ? IconBoardWhite : IconBoard} alt="" />
-      <p>Plaftorm Launch</p>
+      <p>{name}</p>
     </StyledSelector>
   );
 }
