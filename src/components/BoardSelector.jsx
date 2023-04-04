@@ -2,9 +2,9 @@ import styled from "styled-components";
 import IconBoard from "../assets/icon-board.svg";
 import IconBoardWhite from "../assets/icon-board-white.svg";
 
-function BoardSelector({ name, selected }) {
+function BoardSelector({ name, selected, id, onClick }) {
   return (
-    <StyledSelector selected={selected}>
+    <StyledSelector selected={selected} id={id} onClick={onClick}>
       <img src={selected ? IconBoardWhite : IconBoard} alt="" />
       <p>{name}</p>
     </StyledSelector>

@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import Column from "./Column";
-import useData from "../hooks/useData";
+import { useContext } from "react";
+import { Context } from "../hooks/Context";
 
 function Board() {
-  const { boardsData } = useData();
-  const { boards } = boardsData;
+  const { boards } = useContext(Context);
+  const [activeBoard] = boards.filter((element) => element.isActive);
 
-  const columnsList = boards[0].columns.map((element) => (
-    <Column name={element.name} tasks={element.tasks} />
+  const columnsList = activeBoard.columns.map((element) => (
+    <Column
+      key={element.id}
+      id={element.id}
+      name={element.name}
+      tasks={element.tasks}
+    />
   ));
 
   return <StyledBoard>{columnsList}</StyledBoard>;

@@ -1,17 +1,23 @@
+import { useContext } from "react";
+import { Context } from "../hooks/Context";
 import styled from "styled-components";
 
 import logoMobile from "../assets/logo-mobile.svg";
+import iconChevronUp from "../assets/icon-chevron-up.svg";
 import iconChevronDown from "../assets/icon-chevron-down.svg";
 import iconAddTask from "../assets/icon-add-task-mobile.svg";
 import iconVerticalEllipsis from "../assets/icon-vertical-ellipsis.svg";
 
 function Header() {
+  const { boards, showSelector, setShowSelector } = useContext(Context);
+  const [activeBoard] = boards.filter((element) => element.isActive);
+
   return (
     <StyledHeader>
       <img src={logoMobile} alt="kanban logo" />
-      <div>
-        <h2>Platform Launch</h2>
-        <img src={iconChevronDown} alt="down arrow" />
+      <div onClick={() => setShowSelector((prevState) => !prevState)}>
+        <h2>{activeBoard.name}</h2>
+        <img src={showSelector ? iconChevronUp : iconChevronDown} />
       </div>
       <button>
         <img src={iconAddTask} alt="plus sign" />
