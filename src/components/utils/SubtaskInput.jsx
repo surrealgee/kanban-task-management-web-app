@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import iconCross from "../assets/icon-cross.svg";
+import iconCross from "../../assets/icon-cross.svg";
 
 function SubtaskInput() {
   return (

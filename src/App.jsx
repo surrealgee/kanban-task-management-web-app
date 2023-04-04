@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styled from "styled-components";
+import { Context } from "./hooks/Context";
 
 import Header from "./components/Header";
 import Board from "./components/Board";
 import SelectBoardModal from "./components/modals/SelectBoardModal";
 
 function App() {
+  const { modal } = useContext(Context);
   return (
     <StyledApp>
       <Header />
       <Board />
-      <SelectBoardModal />
+      {modal}
     </StyledApp>
   );
 }

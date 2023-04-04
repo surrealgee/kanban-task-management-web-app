@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
-function Input({ label }) {
+function Input({ label, onChange }) {
   return (
     <StyledInput>
       <label className="input">{label}</label>
-      <input type="text" placeholder="e. g. Take coffee break" />
+      <input
+        type="text"
+        placeholder="e. g. Take coffee break"
+        onChange={onChange}
+        name="name"
+      />
     </StyledInput>
   );
 }

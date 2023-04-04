@@ -1,11 +1,39 @@
 import { useState, createContext } from "react";
 import boardsData from "../data";
+import SelectBoardModal from "../components/modals/SelectBoardModal";
+import NewBoardForm from "../components/modals/NewBoardForm";
 
 const Context = createContext();
 
 function ContextProvider({ children }) {
   const [boards, setBoards] = useState(boardsData);
-  const [showSelector, setShowSelector] = useState(false);
+  const [shown, setShown] = useState(false);
+  const [modal, setModal] = useState(null);
+
+  function mountModal(target) {
+    if (target === "boardSelector") {
+      setModal(<SelectBoardModal />);
+      setShown(true);
+    } else if (target === "newBoard") {
+      setModal(<NewBoardForm />);
+    }
+  }
+
+  function unmountModal() {
+    setModal(null);
+    setShown(false);
+  }
+
+  function createBoard(e, newBoard) {
+    e.preventDefault();
+
+    setBoards((prevBoards) => {
+      return [...prevBoards, newBoard];
+    });
+
+    console.log(newBoard);
+    unmountModal();
+  }
 
   function selectBoard(e) {
     let id;
@@ -31,12 +59,20 @@ function ContextProvider({ children }) {
       })
     );
 
-    setShowSelector(false);
+    unmountModal();
   }
 
   return (
     <Context.Provider
-      value={{ boards, selectBoard, showSelector, setShowSelector }}
+      value={{
+        boards,
+        selectBoard,
+        modal,
+        mountModal,
+        unmountModal,
+        shown,
+        createBoard,
+      }}
     >
       {children}
     </Context.Provider>

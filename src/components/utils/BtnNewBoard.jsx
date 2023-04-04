@@ -2,9 +2,9 @@ import styled from "styled-components";
 import IconBoard from "../../assets/icon-board.svg";
 import IconBoardBlue from "../../assets/icon-board-blue.svg";
 
-function BtnNewBoard({ selected }) {
+function BtnNewBoard({ onClick }) {
   return (
-    <StyledBtn>
+    <StyledBtn onClick={onClick}>
       <img src={IconBoardBlue} alt="" />
       <p>+ Create New Board</p>
     </StyledBtn>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Button({ text, primary, danger }) {
+function Button({ text, type, primary, danger, onClick }) {
   let bgColor;
   let color = "#fff";
 
@@ -14,7 +14,7 @@ function Button({ text, primary, danger }) {
   }
 
   return (
-    <StyledBtn bgColor={bgColor} color={color}>
+    <StyledBtn bgColor={bgColor} color={color} type={type} onClick={onClick}>
       {text}
     </StyledBtn>
   );

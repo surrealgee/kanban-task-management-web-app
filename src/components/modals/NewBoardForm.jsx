@@ -1,21 +1,54 @@
+import { useState } from "react";
 import styled from "styled-components";
-import Input from "./Input";
-import SubtaskInput from "./SubtaskInput";
-import Button from "./Button";
+import Input from "../utils/Input";
+import SubtaskInput from "../utils/SubtaskInput";
+import Button from "../utils/Button";
+import ModalBackDrop from "./ModalBackDrop";
 
-function NewTaskForm() {
+import { Context } from "../../hooks/Context";
+import { useContext } from "react";
+import { nanoid } from "nanoid";
+
+function NewBoardForm() {
+  const { createBoard } = useContext(Context);
+
+  const [newBoardData, setNewBoardData] = useState({
+    name: "",
+    isActive: false,
+    id: nanoid(),
+    columns: [],
+  });
+
+  console.log(newBoardData);
+
+  function handleNewBoardChange(e) {
+    const { name, value } = e.target;
+    setNewBoardData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  }
+
   return (
-    <StyledTaskForm>
-      <h2>Add New Board</h2>
-      <Input label="Board Name" />
-      <div>
-        <h3>Board Columns</h3>
-        <SubtaskInput />
-        <SubtaskInput />
-        <Button text="+ Add New Column" />
-      </div>
-      <Button text="Create New Board" primary />
-    </StyledTaskForm>
+    <ModalBackDrop onClick={null}>
+      <StyledTaskForm onSubmit={(e) => createBoard(e, newBoardData)}>
+        <h2>Add New Board</h2>
+        <Input
+          label="Board Name"
+          onChange={handleNewBoardChange}
+          value={newBoardData}
+        />
+        <div>
+          <h3>Board Columns</h3>
+          <SubtaskInput />
+          <SubtaskInput />
+          <Button text="+ Add New Column" type="button" />
+        </div>
+        <Button text="Create New Board" primary />
+      </StyledTaskForm>
+    </ModalBackDrop>
   );
 }
 
@@ -93,4 +126,4 @@ const StyledTaskForm = styled.form`
   }
 `;
 
-export default NewTaskForm;
+export default NewBoardForm;

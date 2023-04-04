@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
-function ModalBackDrop({ children }) {
-  return <StyledModalBackDrop>{children}</StyledModalBackDrop>;
+function ModalBackDrop({ children, onClick }) {
+  return (
+    <StyledModalBackDrop onClick={onClick}>{children}</StyledModalBackDrop>
+  );
 }
 
 const StyledModalBackDrop = styled.div`

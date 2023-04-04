@@ -9,15 +9,18 @@ import iconAddTask from "../assets/icon-add-task-mobile.svg";
 import iconVerticalEllipsis from "../assets/icon-vertical-ellipsis.svg";
 
 function Header() {
-  const { boards, showSelector, setShowSelector } = useContext(Context);
+  const { boards, shown, mountModal, unmountModal, modal } =
+    useContext(Context);
   const [activeBoard] = boards.filter((element) => element.isActive);
 
   return (
     <StyledHeader>
       <img src={logoMobile} alt="kanban logo" />
-      <div onClick={() => setShowSelector((prevState) => !prevState)}>
+      <div
+        onClick={() => (modal ? unmountModal() : mountModal("boardSelector"))}
+      >
         <h2>{activeBoard.name}</h2>
-        <img src={showSelector ? iconChevronUp : iconChevronDown} />
+        <img src={shown ? iconChevronUp : iconChevronDown} />
       </div>
       <button>
         <img src={iconAddTask} alt="plus sign" />

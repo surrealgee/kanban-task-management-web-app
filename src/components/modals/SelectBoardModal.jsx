@@ -7,8 +7,7 @@ import { useContext } from "react";
 import { Context } from "../../hooks/Context";
 
 function SelectBoardModal() {
-  const { boards, selectBoard, showSelector, setShowSelector } =
-    useContext(Context);
+  const { boards, selectBoard, mountModal, unmountModal } = useContext(Context);
 
   const boardsList = boards.map((element) => (
     <BoardSelector
@@ -21,14 +20,11 @@ function SelectBoardModal() {
   ));
 
   return (
-    <StyledBackdrop
-      showSelector={showSelector}
-      onClick={() => setShowSelector(false)}
-    >
-      <StyledModal showSelector={showSelector}>
+    <StyledBackdrop onClick={null}>
+      <StyledModal>
         <h3>All Boards ({boards.length})</h3>
         <div>{boardsList}</div>
-        <BtnNewBoard />
+        <BtnNewBoard onClick={() => mountModal("newBoard")} />
         <ThemeSelector />
       </StyledModal>
     </StyledBackdrop>
@@ -36,7 +32,6 @@ function SelectBoardModal() {
 }
 
 const StyledBackdrop = styled.div`
-  display: ${({ showSelector }) => (showSelector ? "initial" : "none")};
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: calc(100vh - 64px);
@@ -45,7 +40,6 @@ const StyledBackdrop = styled.div`
 `;
 
 const StyledModal = styled.div`
-  display: ${({ showSelector }) => (showSelector ? "initial" : "none")};
   background: #ffffff;
   box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
   border-radius: 8px;

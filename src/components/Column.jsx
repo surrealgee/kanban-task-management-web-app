@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import TaskCard from "./TaskCard";
+import { nanoid } from "nanoid";
 
 function Column({ name, tasks }) {
   const taskList = tasks.map((element) => (
-    <TaskCard title={element.title} subtasks={element.subtasks} />
+    <TaskCard
+      key={nanoid()}
+      title={element.title}
+      subtasks={element.subtasks}
+    />
   ));
 
   return (
