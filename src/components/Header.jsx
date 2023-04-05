@@ -9,7 +9,7 @@ import iconAddTask from "../assets/icon-add-task-mobile.svg";
 import iconVerticalEllipsis from "../assets/icon-vertical-ellipsis.svg";
 
 function Header() {
-  const { boards, shown, mountModal, unmountModal, modal } =
+  const { boards, shown, mountModal, unmountModal, modal, deleteBoard } =
     useContext(Context);
   const [activeBoard] = boards.filter((element) => element.isActive);
 
@@ -25,7 +25,11 @@ function Header() {
       <button>
         <img src={iconAddTask} alt="plus sign" />
       </button>
-      <img src={iconVerticalEllipsis} alt="three vertical dots" />
+      <img
+        src={iconVerticalEllipsis}
+        alt="three vertical dots"
+        onClick={deleteBoard}
+      />
     </StyledHeader>
   );
 }

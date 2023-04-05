@@ -35,6 +35,20 @@ function ContextProvider({ children }) {
     unmountModal();
   }
 
+  function deleteBoard() {
+    const [activeBoard] = boards.filter((element) => element.isActive);
+
+    const remainingBoards = boards.filter(
+      (element) => element.id !== activeBoard.id
+    );
+
+    const updatedBoards = remainingBoards.map((element, index) => {
+      return index < 1 ? { ...element, isActive: true } : element;
+    });
+
+    setBoards(updatedBoards);
+  }
+
   function selectBoard(e) {
     let id;
     if (e.target.id) {
@@ -72,6 +86,7 @@ function ContextProvider({ children }) {
         unmountModal,
         shown,
         createBoard,
+        deleteBoard,
       }}
     >
       {children}

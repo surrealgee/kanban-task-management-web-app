@@ -17,8 +17,6 @@ function Board() {
     />
   ));
 
-  console.log(columnsList);
-
   return (
     <StyledBoard>
       {columnsList.length > 0 ? columnsList : <EmptyBoard />}
