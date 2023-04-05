@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import iconCross from "../../assets/icon-cross.svg";
 
-function SubtaskInput({ id, value, onChange }) {
+function SubtaskInput({ id, value, onChange, onClick }) {
   return (
     <StyleSubtaskInput className="subtask-input" id={id}>
       <input
@@ -10,7 +10,7 @@ function SubtaskInput({ id, value, onChange }) {
         value={value}
         onChange={onChange}
       />
-      <button>
+      <button onClick={onClick} type="button">
         <img src={iconCross} alt="an x icon" />
       </button>
     </StyleSubtaskInput>
@@ -44,6 +44,10 @@ const StyleSubtaskInput = styled.div`
     background: none;
     border: none;
     cursor: pointer;
+  }
+
+  img {
+    pointer-events: none;
   }
 `;
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BtnAddColumn from "./BtnAddColumn";
+import BtnAddColumn from "./utils/BtnAddColumn";
 
 function EmptyBoard() {
   return (

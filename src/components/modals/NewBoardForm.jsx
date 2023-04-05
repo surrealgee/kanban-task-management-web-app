@@ -26,11 +26,10 @@ function NewBoardForm() {
         id={element.id}
         value={element.name}
         onChange={handleColumnChange}
+        onClick={removeColumn}
       />
     );
   });
-
-  console.log(newBoardData);
 
   function addColumn() {
     const newColumn = { name: "", id: nanoid(), tasks: [] };
@@ -40,6 +39,18 @@ function NewBoardForm() {
         ...prevData,
         columns: [...prevData.columns, newColumn],
       };
+    });
+  }
+
+  function removeColumn(e) {
+    const { parentNode } = e.target;
+
+    const updatedColumns = newBoardData.columns.filter(
+      (element) => element.id !== parentNode.id
+    );
+
+    setNewBoardData((prevData) => {
+      return { ...prevData, columns: updatedColumns };
     });
   }
 

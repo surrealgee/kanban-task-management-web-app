@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Column from "./Column";
 import { useContext } from "react";
 import { Context } from "../hooks/Context";
+import EmptyBoard from "./EmptyBoard";
 
 function Board() {
   const { boards } = useContext(Context);
@@ -16,10 +17,17 @@ function Board() {
     />
   ));
 
-  return <StyledBoard>{columnsList}</StyledBoard>;
+  console.log(columnsList);
+
+  return (
+    <StyledBoard>
+      {columnsList.length > 0 ? columnsList : <EmptyBoard />}
+    </StyledBoard>
+  );
 }
 
 const StyledBoard = styled.main`
+  background: #f4f7fd;
   min-height: 90vh;
   padding: 0 1em;
   display: flex;
