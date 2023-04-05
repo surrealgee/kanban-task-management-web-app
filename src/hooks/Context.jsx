@@ -8,7 +8,7 @@ const Context = createContext();
 function ContextProvider({ children }) {
   const [boards, setBoards] = useState(boardsData);
   const [shown, setShown] = useState(false);
-  const [modal, setModal] = useState(null);
+  const [modal, setModal] = useState(false);
 
   function mountModal(target) {
     if (target === "boardSelector") {
@@ -20,7 +20,7 @@ function ContextProvider({ children }) {
   }
 
   function unmountModal() {
-    setModal(null);
+    setModal(false);
     setShown(false);
   }
 

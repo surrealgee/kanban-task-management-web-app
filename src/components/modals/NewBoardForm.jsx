@@ -19,7 +19,41 @@ function NewBoardForm() {
     columns: [],
   });
 
+  const columns = newBoardData.columns.map((element) => {
+    return (
+      <SubtaskInput
+        key={element.id}
+        id={element.id}
+        value={element.name}
+        onChange={handleColumnChange}
+      />
+    );
+  });
+
   console.log(newBoardData);
+
+  function addColumn() {
+    const newColumn = { name: "", id: nanoid(), tasks: [] };
+
+    setNewBoardData((prevData) => {
+      return {
+        ...prevData,
+        columns: [...prevData.columns, newColumn],
+      };
+    });
+  }
+
+  function handleColumnChange(e) {
+    const { value, parentNode } = e.target;
+
+    const updatedColumns = newBoardData.columns.map((element) =>
+      element.id === parentNode.id ? { ...element, name: value } : element
+    );
+
+    setNewBoardData((prevData) => {
+      return { ...prevData, columns: updatedColumns };
+    });
+  }
 
   function handleNewBoardChange(e) {
     const { name, value } = e.target;
@@ -42,9 +76,8 @@ function NewBoardForm() {
         />
         <div>
           <h3>Board Columns</h3>
-          <SubtaskInput />
-          <SubtaskInput />
-          <Button text="+ Add New Column" type="button" />
+          {columns}
+          <Button text="+ Add New Column" type="button" onClick={addColumn} />
         </div>
         <Button text="Create New Board" primary />
       </StyledTaskForm>

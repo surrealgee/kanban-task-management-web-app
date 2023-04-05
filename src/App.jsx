@@ -4,7 +4,6 @@ import { Context } from "./hooks/Context";
 
 import Header from "./components/Header";
 import Board from "./components/Board";
-import SelectBoardModal from "./components/modals/SelectBoardModal";
 
 function App() {
   const { modal } = useContext(Context);
@@ -12,7 +11,7 @@ function App() {
     <StyledApp>
       <Header />
       <Board />
-      {modal}
+      {modal && modal}
     </StyledApp>
   );
 }

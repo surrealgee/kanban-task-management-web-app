@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import iconCross from "../../assets/icon-cross.svg";
 
-function SubtaskInput() {
+function SubtaskInput({ id, value, onChange }) {
   return (
-    <StyleSubtaskInput className="subtask-input">
-      <input type="text" placeholder="e. g. Make coffee" />
+    <StyleSubtaskInput className="subtask-input" id={id}>
+      <input
+        type="text"
+        placeholder="e. g. Make coffee"
+        value={value}
+        onChange={onChange}
+      />
       <button>
         <img src={iconCross} alt="an x icon" />
       </button>
