@@ -1,6 +1,9 @@
 import { useContext } from "react";
-import { Context } from "../hooks/Context";
 import styled from "styled-components";
+
+import { Context } from "../hooks/Context";
+import useApp from "../hooks/useApp";
+import useBoard from "../hooks/useBoard";
 
 import logoMobile from "../assets/logo-mobile.svg";
 import iconChevronUp from "../assets/icon-chevron-up.svg";
@@ -9,8 +12,12 @@ import iconAddTask from "../assets/icon-add-task-mobile.svg";
 import iconVerticalEllipsis from "../assets/icon-vertical-ellipsis.svg";
 
 function Header() {
-  const { boards, shown, mountModal, unmountModal, modal, deleteBoard } =
-    useContext(Context);
+  const { boards, shown, modal } = useContext(Context);
+
+  const { mountModal, unmountModal } = useApp();
+
+  const { deleteBoard } = useBoard();
+
   const [activeBoard] = boards.filter((element) => element.isActive);
 
   return (

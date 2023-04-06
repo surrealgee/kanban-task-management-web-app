@@ -5,12 +5,12 @@ import SubtaskInput from "../utils/SubtaskInput";
 import Button from "../utils/Button";
 import ModalBackDrop from "./ModalBackDrop";
 
-import { Context } from "../../hooks/Context";
-import { useContext } from "react";
+import useBoard from "../../hooks/useBoard";
+
 import { nanoid } from "nanoid";
 
 function NewBoardForm() {
-  const { createBoard } = useContext(Context);
+  const { createBoard } = useBoard();
 
   const [newBoardData, setNewBoardData] = useState({
     name: "",

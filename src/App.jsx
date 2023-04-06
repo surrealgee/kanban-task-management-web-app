@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Board from "./components/Board";
 
 function App() {
-  const { modal } = useContext(Context);
+  const { modal = false } = useContext(Context);
   return (
     <StyledApp>
       <Header />
