@@ -5,9 +5,13 @@ import ThemeSelector from "../utils/ThemeSelector";
 
 import { useContext } from "react";
 import { Context } from "../../hooks/Context";
+import useApp from "../../hooks/useApp";
+import useBoard from "../../hooks/useBoard";
 
 function SelectBoardModal() {
-  const { boards, selectBoard, mountModal, unmountModal } = useContext(Context);
+  const { boards } = useContext(Context);
+  const { mountModal } = useApp();
+  const { selectBoard } = useBoard();
 
   const boardsList = boards.map((element) => (
     <BoardSelector
