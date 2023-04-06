@@ -6,11 +6,13 @@ import Button from "../utils/Button";
 import ModalBackDrop from "./ModalBackDrop";
 
 import useBoard from "../../hooks/useBoard";
+import useColumn from "../../hooks/useColumn";
 
 import { nanoid } from "nanoid";
 
 function NewBoardForm() {
-  const { createBoard } = useBoard();
+  const { createBoard, handleNameChange } = useBoard();
+  const { addColumn, handleColumnChange, removeColumn } = useColumn();
 
   const [newBoardData, setNewBoardData] = useState({
     name: "",
@@ -25,70 +27,29 @@ function NewBoardForm() {
         key={element.id}
         id={element.id}
         value={element.name}
-        onChange={handleColumnChange}
-        onClick={removeColumn}
+        onChange={(e) => handleColumnChange(e, newBoardData, setNewBoardData)}
+        onClick={(e) => removeColumn(e, newBoardData, setNewBoardData)}
       />
     );
   });
 
-  function addColumn() {
-    const newColumn = { name: "", id: nanoid(), tasks: [] };
-
-    setNewBoardData((prevData) => {
-      return {
-        ...prevData,
-        columns: [...prevData.columns, newColumn],
-      };
-    });
-  }
-
-  function removeColumn(e) {
-    const { parentNode } = e.target;
-
-    const updatedColumns = newBoardData.columns.filter(
-      (element) => element.id !== parentNode.id
-    );
-
-    setNewBoardData((prevData) => {
-      return { ...prevData, columns: updatedColumns };
-    });
-  }
-
-  function handleColumnChange(e) {
-    const { value, parentNode } = e.target;
-
-    const updatedColumns = newBoardData.columns.map((element) =>
-      element.id === parentNode.id ? { ...element, name: value } : element
-    );
-
-    setNewBoardData((prevData) => {
-      return { ...prevData, columns: updatedColumns };
-    });
-  }
-
-  function handleNewBoardChange(e) {
-    const { name, value } = e.target;
-    setNewBoardData((prevState) => {
-      return {
-        ...prevState,
-        [name]: value,
-      };
-    });
-  }
-
   return (
-    <ModalBackDrop onClick={null}>
+    <ModalBackDrop>
       <StyledTaskForm onSubmit={(e) => createBoard(e, newBoardData)}>
         <h2>Add New Board</h2>
         <Input
           label="Board Name"
-          onChange={handleNewBoardChange}
+          onChange={(e) => handleNameChange(e, setNewBoardData)}
           value={newBoardData}
         />
         <div>
           <h3>Board Columns</h3>
           {columns}
-          <Button text="+ Add New Column" type="button" onClick={addColumn} />
+          <Button
+            text="+ Add New Column"
+            type="button"
+            onClick={() => addColumn(setNewBoardData)}
+          />
         </div>
         <Button text="Create New Board" primary />
       </StyledTaskForm>

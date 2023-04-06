@@ -1,25 +1,70 @@
 import styled from "styled-components";
-import Input from "./Input";
-import SubtaskInput from "./SubtaskInput";
-import Button from "./Button";
+import ControlledInput from "../utils/ControlledInput";
+import SubtaskInput from "../utils/SubtaskInput";
+import Button from "../utils/Button";
+import ModalBackDrop from "./ModalBackDrop";
 
-function NewTaskForm() {
+import { useState, useContext, useEffect } from "react";
+import { Context } from "../../hooks/Context";
+import useBoard from "../../hooks/useBoard";
+import useColumn from "../../hooks/useColumn";
+
+function EditBoardForm() {
+  const [targetBoard, setTargetBoard] = useState("");
+
+  const { boards } = useContext(Context);
+  const [activeBoard] = boards.filter((element) => element.isActive);
+
+  const { editBoard, handleNameChange } = useBoard();
+  const { addColumn, handleColumnChange, removeColumn } = useColumn();
+
+  let columns = null;
+
+  if (targetBoard) {
+    columns = targetBoard.columns.map((element) => {
+      return (
+        <SubtaskInput
+          key={element.id}
+          id={element.id}
+          value={element.name}
+          onChange={(e) => handleColumnChange(e, targetBoard, setTargetBoard)}
+          onClick={(e) => removeColumn(e, targetBoard, setTargetBoard)}
+        />
+      );
+    });
+  }
+
+  useEffect(() => {
+    console.log("Effect Ran");
+    const target = { ...activeBoard };
+    setTargetBoard(target);
+  }, [boards]);
+
   return (
-    <StyledTaskForm>
-      <h2>Edit Board</h2>
-      <Input label="Board Name" />
-      <div>
-        <h3>Board Columns</h3>
-        <SubtaskInput />
-        <SubtaskInput />
-        <Button text="+ Add New Column" />
-      </div>
-      <Button text="Create New Board" primary />
-    </StyledTaskForm>
+    <ModalBackDrop>
+      <StyledBoardForm onSubmit={(e) => editBoard(e, targetBoard)}>
+        <h2>Edit Board</h2>
+        <ControlledInput
+          label="Board Name"
+          value={targetBoard.name}
+          onChange={(e) => handleNameChange(e, setTargetBoard)}
+        />
+        <div>
+          <h3>Board Columns</h3>
+          {columns && columns}
+          <Button
+            text="+ Add New Column"
+            type="button"
+            onClick={() => addColumn(setTargetBoard)}
+          />
+        </div>
+        <Button text="Save changes" primary />
+      </StyledBoardForm>
+    </ModalBackDrop>
   );
 }
 
-const StyledTaskForm = styled.form`
+const StyledBoardForm = styled.form`
   background: #fff;
   padding: 1.5em;
   position: fixed;
@@ -93,4 +138,4 @@ const StyledTaskForm = styled.form`
   }
 `;
 
-export default NewTaskForm;
+export default EditBoardForm;

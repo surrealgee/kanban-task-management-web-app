@@ -6,6 +6,18 @@ function useBoard() {
   const { boards, setBoards } = useContext(Context);
   const { unmountModal } = useApp();
 
+  function editBoard(e, newData) {
+    e.preventDefault();
+
+    const updatedBoards = boards.map((element) => {
+      return element.id === newData.id ? newData : element;
+    });
+
+    setBoards(updatedBoards);
+
+    unmountModal();
+  }
+
   function createBoard(e, newBoard) {
     e.preventDefault();
 
@@ -57,7 +69,17 @@ function useBoard() {
     unmountModal();
   }
 
-  return { createBoard, deleteBoard, selectBoard };
+  function handleNameChange(e, setData) {
+    const { name, value } = e.target;
+    setData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  }
+
+  return { createBoard, deleteBoard, selectBoard, editBoard, handleNameChange };
 }
 
 export default useBoard;

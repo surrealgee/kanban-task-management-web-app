@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Context } from "./Context";
 import SelectBoardModal from "../components/modals/SelectBoardModal";
 import NewBoardForm from "../components/modals/NewBoardForm";
+import EditBoardForm from "../components/modals/EditBoardForm";
 
 function useApp() {
   const { setModal, setShown } = useContext(Context);
@@ -12,6 +13,8 @@ function useApp() {
       setShown(true);
     } else if (target === "newBoard") {
       setModal(<NewBoardForm />);
+    } else if (target === "editBoard") {
+      setModal(<EditBoardForm />);
     }
   }
 

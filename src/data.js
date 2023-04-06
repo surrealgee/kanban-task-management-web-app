@@ -8,6 +8,7 @@ const boardsData = [
     columns: [
       {
         name: "Todo",
+        id: nanoid(),
         tasks: [
           {
             title: "Build UI for onboarding flow",
@@ -74,6 +75,7 @@ const boardsData = [
       },
       {
         name: "Doing",
+        id: nanoid(),
         tasks: [
           {
             title: "Design settings and search pages",
@@ -188,6 +190,7 @@ const boardsData = [
       },
       {
         name: "Done",
+        id: nanoid(),
         tasks: [
           {
             title: "Conduct 5 wireframe tests",

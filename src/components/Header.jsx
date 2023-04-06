@@ -35,7 +35,7 @@ function Header() {
       <img
         src={iconVerticalEllipsis}
         alt="three vertical dots"
-        onClick={deleteBoard}
+        onClick={() => mountModal("editBoard")}
       />
     </StyledHeader>
   );
