@@ -28,7 +28,9 @@ function useBoard() {
     unmountModal();
   }
 
-  function deleteBoard() {
+  function deleteBoard(e) {
+    e.preventDefault();
+
     const [activeBoard] = boards.filter((element) => element.isActive);
 
     const remainingBoards = boards.filter(

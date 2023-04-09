@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-function BtnAddColumn() {
-  return <StyledBtn>+ Add New Column</StyledBtn>;
+function BtnAddColumn({ onClick }) {
+  return <StyledBtn onClick={onClick}>+ Add New Column</StyledBtn>;
 }
 
 const StyledBtn = styled.button`

@@ -1,17 +1,33 @@
 import styled from "styled-components";
-import Button from "./Button";
+import Button from "../utils/Button";
+import ModalBackDrop from "./ModalBackDrop";
+import { useContext } from "react";
+import { Context } from "../../hooks/Context";
+import useApp from "../../hooks/useApp";
+import useBoard from "../../hooks/useBoard";
 
 function DeleteBoardPrompt() {
+  const { boards } = useContext(Context);
+  const [activeBoard] = boards.filter((element) => element.isActive);
+  const { unmountModal } = useApp();
+  const { deleteBoard } = useBoard();
   return (
-    <StyledTaskForm>
-      <h2>Delete this Board?</h2>
-      <p>
-        Are you sure you want to delete the ‘Platform Launch’ board? This action
-        will remove all columns and tasks and cannot be reversed.
-      </p>
-      <Button text="Delete" danger />
-      <Button text="Cancel" />
-    </StyledTaskForm>
+    <ModalBackDrop>
+      <StyledTaskForm
+        onSubmit={(e) => {
+          deleteBoard(e), unmountModal();
+        }}
+      >
+        <h2>Delete this Board?</h2>
+        <p>
+          Are you sure you want to delete <strong>{activeBoard.name} </strong>
+          board? This action will remove all columns and tasks and cannot be
+          reversed.
+        </p>
+        <Button text="Delete" danger />
+        <Button text="Cancel" type="button" onClick={() => unmountModal()} />
+      </StyledTaskForm>
+    </ModalBackDrop>
   );
 }
 

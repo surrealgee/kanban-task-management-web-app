@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import BtnAddColumn from "./utils/BtnAddColumn";
+import useApp from "../hooks/useApp";
 
 function EmptyBoard() {
+  const { mountModal } = useApp();
   return (
     <StyledBoard>
       <p>This board is empty. Create a new column to get started.</p>
-      <BtnAddColumn />
+      <BtnAddColumn onClick={() => mountModal("editBoard")} />
     </StyledBoard>
   );
 }

@@ -3,18 +3,30 @@ import { Context } from "./Context";
 import SelectBoardModal from "../components/modals/SelectBoardModal";
 import NewBoardForm from "../components/modals/NewBoardForm";
 import EditBoardForm from "../components/modals/EditBoardForm";
+import OptionsModal from "../components/modals/OptionsModal";
+import DeleteBoardPrompt from "../components/modals/DeleteBoardPrompt";
 
 function useApp() {
   const { setModal, setShown } = useContext(Context);
 
   function mountModal(target) {
-    if (target === "boardSelector") {
-      setModal(<SelectBoardModal />);
-      setShown(true);
-    } else if (target === "newBoard") {
-      setModal(<NewBoardForm />);
-    } else if (target === "editBoard") {
-      setModal(<EditBoardForm />);
+    switch (target) {
+      case "boardSelector":
+        setModal(<SelectBoardModal />);
+        setShown(true);
+        break;
+      case "newBoard":
+        setModal(<NewBoardForm />);
+        break;
+      case "editBoard":
+        setModal(<EditBoardForm />);
+        break;
+      case "optionsModal":
+        setModal(<OptionsModal />);
+        break;
+      case "deleteBoard":
+        setModal(<DeleteBoardPrompt />);
+        break;
     }
   }
 
