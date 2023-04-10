@@ -1,50 +1,53 @@
 import styled from "styled-components";
+import ModalBackDrop from "./ModalBackDrop";
 
-import iconVerticalEllipsis from "../assets/icon-vertical-ellipsis.svg";
+import iconVerticalEllipsis from "../../assets/icon-vertical-ellipsis.svg";
 
 function TaskModal() {
   return (
-    <StyledTaskModal>
-      <div className="title-container">
-        <h2>
-          Research pricing points of various competitors and trial different
-          business models
-        </h2>
-        <img src={iconVerticalEllipsis} alt="three vertical dots" />
-      </div>
-      <p>
-        We know what we're planning to build for version one. Now we need to
-        finalise the first pricing model we'll use. Keep iterating the subtasks
-        until we have a coherent proposition.
-      </p>
-      <div className="subtaks-container">
-        <h3>Subtaks (2 of 3)</h3>
-        <div className="subtask">
-          <input type="checkbox" />
-          <label htmlFor="#">
-            Research competitor pricing and business models
-          </label>
+    <ModalBackDrop>
+      <StyledTaskModal>
+        <div className="title-container">
+          <h2>
+            Research pricing points of various competitors and trial different
+            business models
+          </h2>
+          <img src={iconVerticalEllipsis} alt="three vertical dots" />
         </div>
-        <div className="subtask">
-          <input type="checkbox" />
-          <label htmlFor="#">
-            Outline a business model that works for our solution
-          </label>
+        <p>
+          We know what we're planning to build for version one. Now we need to
+          finalise the first pricing model we'll use. Keep iterating the
+          subtasks until we have a coherent proposition.
+        </p>
+        <div className="subtaks-container">
+          <h3>Subtaks (2 of 3)</h3>
+          <div className="subtask">
+            <input type="checkbox" />
+            <label htmlFor="#">
+              Research competitor pricing and business models
+            </label>
+          </div>
+          <div className="subtask">
+            <input type="checkbox" />
+            <label htmlFor="#">
+              Outline a business model that works for our solution
+            </label>
+          </div>
+          <div className="subtask">
+            <input type="checkbox" />
+            <label htmlFor="#">
+              Outline a business model that works for our solution
+            </label>
+          </div>
+          <div className="status-container">
+            <h3>Current Status</h3>
+            <select name="" id="">
+              <option value="">Doing</option>
+            </select>
+          </div>
         </div>
-        <div className="subtask">
-          <input type="checkbox" />
-          <label htmlFor="#">
-            Outline a business model that works for our solution
-          </label>
-        </div>
-        <div className="status-container">
-          <h3>Current Status</h3>
-          <select name="" id="">
-            <option value="">Doing</option>
-          </select>
-        </div>
-      </div>
-    </StyledTaskModal>
+      </StyledTaskModal>
+    </ModalBackDrop>
   );
 }
 

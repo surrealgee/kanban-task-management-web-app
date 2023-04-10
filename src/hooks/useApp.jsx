@@ -5,6 +5,8 @@ import NewBoardForm from "../components/modals/NewBoardForm";
 import EditBoardForm from "../components/modals/EditBoardForm";
 import OptionsModal from "../components/modals/OptionsModal";
 import DeleteBoardPrompt from "../components/modals/DeleteBoardPrompt";
+import TaskModal from "../components/modals/TaskModal";
+import NewTaskForm from "../components/modals/NewTaskForm";
 
 function useApp() {
   const { setModal, setShown } = useContext(Context);
@@ -26,6 +28,12 @@ function useApp() {
         break;
       case "deleteBoard":
         setModal(<DeleteBoardPrompt />);
+        break;
+      case "viewTask":
+        setModal(<TaskModal />);
+        break;
+      case "addTask":
+        setModal(<NewTaskForm />);
         break;
     }
   }

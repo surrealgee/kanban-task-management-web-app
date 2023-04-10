@@ -1,18 +1,30 @@
 import styled from "styled-components";
 import TaskCard from "./TaskCard";
 import { nanoid } from "nanoid";
+import useApp from "../hooks/useApp";
+import useTask from "../hooks/useTask";
 
-function Column({ name, tasks }) {
-  const taskList = tasks.map((element) => (
-    <TaskCard
-      key={nanoid()}
-      title={element.title}
-      subtasks={element.subtasks}
-    />
-  ));
+function Column({ name, tasks, id }) {
+  const { mountModal } = useApp();
+  const { selectTask } = useTask();
+
+  const taskList = tasks.map((element) => {
+    const id = nanoid();
+    return (
+      <TaskCard
+        key={id}
+        id={id}
+        title={element.title}
+        subtasks={element.subtasks}
+        onClick={(e) => {
+          selectTask(e), mountModal("viewTask");
+        }}
+      />
+    );
+  });
 
   return (
-    <StyledColumn>
+    <StyledColumn id={id}>
       <h2>
         {name.toUpperCase()} ({tasks.length})
       </h2>

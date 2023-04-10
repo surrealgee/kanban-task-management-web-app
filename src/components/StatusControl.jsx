@@ -1,11 +1,24 @@
 import styled from "styled-components";
+import { Context } from "../hooks/Context";
+import { useContext } from "react";
 
 function StatusControl() {
+  const { boards } = useContext(Context);
+  const [activeBoard] = boards.filter((element) => element.isActive);
+
+  const columns = activeBoard.columns.map((element) => {
+    return (
+      <option key={element.id} value={element.name}>
+        {element.name.toUpperCase()}
+      </option>
+    );
+  });
+
   return (
     <StyledStatus>
       <h3>Current Status</h3>
       <select name="" id="">
-        <option value="">Doing</option>
+        {columns}
       </select>
     </StyledStatus>
   );

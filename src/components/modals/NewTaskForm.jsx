@@ -1,25 +1,67 @@
 import styled from "styled-components";
-import StatusControl from "./StatusControl";
-import Input from "./Input";
-import TextArea from "./TextArea";
-import SubtaskInput from "./SubtaskInput";
-import Button from "./Button";
+import StatusControl from "../StatusControl";
+import Input from "../utils/Input";
+import TextArea from "../utils/TextArea";
+import SubtaskInput from "../utils/SubtaskInput";
+import Button from "../utils/Button";
+import ModalBackDrop from "./ModalBackDrop";
+
+import { useState } from "react";
+
+import { nanoid } from "nanoid";
+import useTask from "../../hooks/useTask";
+import useSubtask from "../../hooks/useSubtask";
 
 function NewTaskForm() {
+  const { handleNameChange } = useTask();
+  const { addSubtask, removeSubTask, handleSubtaskChange } = useSubtask();
+
+  const [newTaskData, setNewTaskData] = useState({
+    title: "",
+    id: nanoid(),
+    description: "",
+    status: "",
+    subtasks: [],
+  });
+
+  const subtasks = newTaskData.subtasks.map((element) => {
+    return (
+      <SubtaskInput
+        key={element.id}
+        id={element.id}
+        value={element.title}
+        onChange={(e) => handleSubtaskChange(e, newTaskData, setNewTaskData)}
+        onClick={(e) => removeSubTask(e, newTaskData, setNewTaskData)}
+      />
+    );
+  });
+
   return (
-    <StyledTaskForm>
-      <h2>Add New Task</h2>
-      <Input />
-      <TextArea />
-      <div>
-        <h3>Subtaks</h3>
-        <SubtaskInput />
-        <SubtaskInput />
-        <Button text="+ Add New Subtask" />
-      </div>
-      <StatusControl />
-      <Button text="Create Task" primary />
-    </StyledTaskForm>
+    <ModalBackDrop>
+      <StyledTaskForm>
+        <h2>Add New Task</h2>
+        <Input
+          label="Title"
+          name="title"
+          onChange={(e) => handleNameChange(e, setNewTaskData)}
+        />
+        <TextArea
+          name="description"
+          onChange={(e) => handleNameChange(e, setNewTaskData)}
+        />
+        <div>
+          <h3>Subtaks</h3>
+          {subtasks}
+          <Button
+            text="+ Add New Subtask"
+            type="button"
+            onClick={() => addSubtask(setNewTaskData)}
+          />
+        </div>
+        <StatusControl />
+        <Button text="Create Task" primary />
+      </StyledTaskForm>
+    </ModalBackDrop>
   );
 }
 

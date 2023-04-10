@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-function TaskCard({ title, subtasks }) {
+function TaskCard({ title, subtasks, id, onClick }) {
   const completed = subtasks.filter((element) => element.isCompleted);
 
   return (
-    <StyledTaskCard className="task">
+    <StyledTaskCard className="task" id={id} onClick={onClick}>
       <h3>{title}</h3>
       <p>
         {completed.length} of {subtasks.length} subtasks

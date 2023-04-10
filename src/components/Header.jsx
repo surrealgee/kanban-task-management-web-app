@@ -29,8 +29,8 @@ function Header() {
         <h2>{activeBoard.name}</h2>
         <img src={shown ? iconChevronUp : iconChevronDown} />
       </div>
-      <button>
-        <img src={iconAddTask} alt="plus sign" />
+      <button onClick={() => mountModal("addTask")}>
+        <img src={iconAddTask} alt="plus sign" className="plus-sign" />
       </button>
       <img
         src={iconVerticalEllipsis}
@@ -53,8 +53,7 @@ const StyledHeader = styled.header`
     gap: 0.5em;
     margin-right: auto;
   }
-
-  h2 {
+  s h2 {
     font-family: "Plus Jakarta Sans";
     font-size: 1.125rem;
     color: #000112;
@@ -68,6 +67,10 @@ const StyledHeader = styled.header`
     padding: 0.625em 1.125em;
     display: flex;
     align-items: center;
+  }
+
+  .plus-sign {
+    pointer-events: none;
   }
 `;
 

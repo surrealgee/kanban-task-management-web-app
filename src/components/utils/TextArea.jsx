@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-function TextArea() {
+function TextArea({ name, onChange }) {
   return (
     <StyledTextArea>
       <label className="textarea">Description</label>
-      <textarea name="" id=""></textarea>
+      <textarea name={name} onChange={onChange}></textarea>
     </StyledTextArea>
   );
 }
