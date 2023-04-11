@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Input({ label, onChange }) {
+function Input({ label, onChange, name }) {
   return (
     <StyledInput>
       <label className="input">{label}</label>
@@ -8,7 +8,7 @@ function Input({ label, onChange }) {
         type="text"
         placeholder="e. g. Take coffee break"
         onChange={onChange}
-        name="name"
+        name={name}
       />
     </StyledInput>
   );

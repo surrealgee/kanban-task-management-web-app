@@ -7,14 +7,14 @@ const boardsData = [
     id: nanoid(),
     columns: [
       {
-        name: "Todo",
+        name: "todo",
         id: nanoid(),
         tasks: [
           {
             title: "Build UI for onboarding flow",
             id: nanoid(),
             description: "",
-            status: "Todo",
+            status: "todo",
             subtasks: [
               {
                 title: "Sign up page",
@@ -34,7 +34,7 @@ const boardsData = [
             title: "Build UI for search",
             id: nanoid(),
             description: "",
-            status: "Todo",
+            status: "todo",
             subtasks: [
               {
                 title: "Search page",
@@ -46,7 +46,7 @@ const boardsData = [
             title: "Build settings UI",
             id: nanoid(),
             description: "",
-            status: "Todo",
+            status: "todo",
             subtasks: [
               {
                 title: "Account page",
@@ -63,7 +63,7 @@ const boardsData = [
             id: nanoid(),
             description:
               "Once we feel version one is ready, we need to rigorously test it both internally and externally to identify any major gaps.",
-            status: "Todo",
+            status: "todo",
             subtasks: [
               {
                 title: "Internal testing",

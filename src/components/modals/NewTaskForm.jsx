@@ -11,9 +11,11 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import useTask from "../../hooks/useTask";
 import useSubtask from "../../hooks/useSubtask";
+import useBoard from "../../hooks/useBoard";
 
 function NewTaskForm() {
-  const { handleNameChange } = useTask();
+  const { setBoards } = useBoard();
+  const { createTask, handleNameChange, handleStatusChange } = useTask();
   const { addSubtask, removeSubTask, handleSubtaskChange } = useSubtask();
 
   const [newTaskData, setNewTaskData] = useState({
@@ -35,6 +37,8 @@ function NewTaskForm() {
       />
     );
   });
+
+  // console.log(newTaskData);
 
   return (
     <ModalBackDrop>
@@ -58,8 +62,14 @@ function NewTaskForm() {
             onClick={() => addSubtask(setNewTaskData)}
           />
         </div>
-        <StatusControl />
-        <Button text="Create Task" primary />
+        <StatusControl
+          onChange={(e) => handleStatusChange(e, setNewTaskData)}
+        />
+        <Button
+          text="Create Task"
+          primary
+          onClick={(e) => createTask(e, newTaskData)}
+        />
       </StyledTaskForm>
     </ModalBackDrop>
   );

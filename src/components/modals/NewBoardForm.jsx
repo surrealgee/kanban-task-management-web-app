@@ -41,6 +41,7 @@ function NewBoardForm() {
           label="Board Name"
           onChange={(e) => handleNameChange(e, setNewBoardData)}
           value={newBoardData}
+          name="name"
         />
         <div>
           <h3>Board Columns</h3>

@@ -4,11 +4,13 @@ import useApp from "./useApp";
 import { nanoid } from "nanoid";
 
 function useTask() {
-  const { boards } = useContext(Context);
+  const { boards, setBoards } = useContext(Context);
+  const { unmountModal } = useApp();
   const [activeBoard] = boards.filter((element) => element.isActive);
 
   function handleNameChange(e, setData) {
     const { name, value } = e.target;
+    console.log(name);
     setData((prevData) => {
       return {
         ...prevData,
@@ -17,32 +19,22 @@ function useTask() {
     });
   }
 
-  function selectTask(e) {
-    let taskId;
-    let columnId;
+  function handleStatusChange(e, setData) {
+    const { name, value } = e.target;
 
-    if (e.target.id) {
-      taskId = e.target.id;
-      columnId = e.target.parentNode.parentNode.id;
-    } else {
-      taskId = e.target.parentNode.id;
-      columnId = e.target.parentNode.parentNode.parentNode.id;
-    }
-
-    const [targetColumn] = activeBoard.columns.filter(
-      (element) => element.id === columnId
-    );
-
-    const [targetTask] = targetColumn.tasks.filter(
-      (element) => element.id === taskId
-    );
-
-    console.log(targetColumn);
-    console.log(taskId);
-    console.log(targetTask);
+    setData((prevData) => {
+      return {
+        ...prevData,
+        [name]: value.toLowerCase(),
+      };
+    });
   }
 
-  return { selectTask, handleNameChange };
+  function createTask(e, data, setData) {
+    e.preventDefault();
+  }
+
+  return { createTask, handleNameChange, handleStatusChange };
 }
 
 export default useTask;

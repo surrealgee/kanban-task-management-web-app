@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Context } from "../hooks/Context";
 import { useContext } from "react";
 
-function StatusControl() {
+function StatusControl({ onChange }) {
   const { boards } = useContext(Context);
   const [activeBoard] = boards.filter((element) => element.isActive);
 
@@ -17,7 +17,8 @@ function StatusControl() {
   return (
     <StyledStatus>
       <h3>Current Status</h3>
-      <select name="" id="">
+      <select name="status" id="" onChange={onChange}>
+        <option value=""></option>
         {columns}
       </select>
     </StyledStatus>

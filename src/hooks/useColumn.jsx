@@ -23,7 +23,9 @@ function useColumn() {
     const { value, parentNode } = e.target;
 
     const updatedColumns = data.columns.map((element) =>
-      element.id === parentNode.id ? { ...element, name: value } : element
+      element.id === parentNode.id
+        ? { ...element, name: value.toLowerCase() }
+        : element
     );
 
     setData((prevData) => {
