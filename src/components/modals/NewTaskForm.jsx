@@ -42,7 +42,7 @@ function NewTaskForm() {
 
   return (
     <ModalBackDrop>
-      <StyledTaskForm>
+      <StyledTaskForm onSubmit={(e) => createTask(e, newTaskData)}>
         <h2>Add New Task</h2>
         <Input
           label="Title"
@@ -65,11 +65,7 @@ function NewTaskForm() {
         <StatusControl
           onChange={(e) => handleStatusChange(e, setNewTaskData)}
         />
-        <Button
-          text="Create Task"
-          primary
-          onClick={(e) => createTask(e, newTaskData)}
-        />
+        <Button text="Create Task" primary />
       </StyledTaskForm>
     </ModalBackDrop>
   );

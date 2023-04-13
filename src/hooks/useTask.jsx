@@ -10,7 +10,6 @@ function useTask() {
 
   function handleNameChange(e, setData) {
     const { name, value } = e.target;
-    console.log(name);
     setData((prevData) => {
       return {
         ...prevData,
@@ -30,8 +29,24 @@ function useTask() {
     });
   }
 
-  function createTask(e, data, setData) {
+  function createTask(e, data) {
     e.preventDefault();
+
+    const updtatedColumns = activeBoard.columns.map((column) => {
+      return column.name === data.status
+        ? { ...column, tasks: [...column.tasks, data] }
+        : column;
+    });
+
+    const updatedBoard = { ...activeBoard, columns: updtatedColumns };
+
+    setBoards((prevBoards) => {
+      return prevBoards.map((board) => {
+        return board.id === updatedBoard.id ? { ...updatedBoard } : board;
+      });
+    });
+
+    unmountModal();
   }
 
   return { createTask, handleNameChange, handleStatusChange };
